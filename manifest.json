@@ -7,6 +7,6 @@
 
   "content_scripts": [{
     "matches": ["*://*/*"],
-    "js": ["jquery-2.1.4.min.js", "main.js"]
+    "js": ["jquery-2.1.4.min.js", "main.js", "dict.js"]
   }]
 }
