@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+
+  "name": "Clickbait Block",
+  "description": "Remove clickbait style articles",
+  "version": "0.0.1",
+
+  "content_scripts": [{
+    "matches": ["*://*/*"],
+    "js": ["jquery-2.1.4.min.js", "main.js"]
+  }]
+}
