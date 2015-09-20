@@ -11,6 +11,7 @@ This (kind of) works right now but it's super slow and needs many improvements.
  - [ ] match links to sites such as buzzfeed, clickhole, upworthy, etc.
  - [ ] generate replacement titles
  - [ ] add icon and publish to chrome store
+ - [ ] update when page changes
 
 ---
 
