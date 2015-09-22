@@ -4,4 +4,4 @@ var dict = {
   "blocked_urls": ["bzfd.it", "buzzfeed.com", "clickhole.com", "u.pw", "upworthy.com"]
 };
 
-var newTitle = "DONT CLICK THIS!!";
+var newTitle = "Don't Click This!";

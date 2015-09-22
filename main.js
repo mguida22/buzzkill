@@ -19,7 +19,26 @@ function formatCurrentUrl() {
 }
 
 function changeFacebookLink(_this) {
-  changeLink(_this);
+  var uilinkSubtle, UFINoWrap, UFIShareLink, UFICommentLink, UFICommentLike;
+
+  console.log('a');
+  console.log(_this);
+
+  uilinkSubtle = $(_this).hasClass("uiLinkSubtle");
+  UFINoWrap = $(_this).hasClass("UFINoWrap");
+  UFIShareLink = $(_this).hasClass("UFIShareLink");
+  UFICommentLink = $(_this).hasClass("UFICommentLink");
+  UFICommentLike = $(_this).hasClass("UFICommentLikeButton");
+
+  if ()
+
+  if (uilinkSubtle || UFINoWrap || UFIShareLink || UFICommentLink || UFICommentLike) {
+    console.log('b');
+    return;
+  } else {
+    console.log('c');
+    changeLink(_this);
+  }
 }
 
 function changeLink(_this) {
@@ -29,7 +48,6 @@ function changeLink(_this) {
   link = $(_this).attr('href');
   title = $(_this).text();
   title = title.trim().toLowerCase();
-
 
   if (title) {
     dict["phrases"].forEach(function(phrase) {
@@ -77,10 +95,11 @@ $(function() {
 
 function main() {
   $("a").each(function() {
-    // if we're on facebook and it's a link to facebook, don't change
+    // if we're on facebook and it's a link to facebook handle it specially
     if (isFacebook && $(this).attr('href') && $(this).attr('href').indexOf(currentUrl) > -1) {
       changeFacebookLink(this);
+    } else {
+      changeLink(this);
     }
-    changeLink(this);
   });
 }
