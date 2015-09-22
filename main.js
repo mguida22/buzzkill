@@ -1,5 +1,6 @@
 var currentUrl;
 var isFacebook = false;
+var isBuzzfeed = false;
 
 function formatCurrentUrl() {
   // send to lowercase for easier matching later
@@ -16,13 +17,15 @@ function formatCurrentUrl() {
   if (currentUrl.indexOf('facebook') > -1) {
     isFacebook = true;
   }
+
+  if (currentUrl.indexOf('buzzfeed') > -1) {
+    console.log("caught url")
+    isBuzzfeed = true;
+  }
 }
 
 function changeFacebookLink(_this) {
   var uilinkSubtle, UFINoWrap, UFIShareLink, UFICommentLink, UFICommentLike;
-
-  console.log('a');
-  console.log(_this);
 
   uilinkSubtle = $(_this).hasClass("uiLinkSubtle");
   UFINoWrap = $(_this).hasClass("UFINoWrap");
@@ -30,15 +33,28 @@ function changeFacebookLink(_this) {
   UFICommentLink = $(_this).hasClass("UFICommentLink");
   UFICommentLike = $(_this).hasClass("UFICommentLikeButton");
 
-  if ()
-
   if (uilinkSubtle || UFINoWrap || UFIShareLink || UFICommentLink || UFICommentLike) {
-    console.log('b');
+
     return;
   } else {
-    console.log('c');
+
     changeLink(_this);
   }
+}
+
+function changeBuzzfeedLink(_this) {
+  var ledeLink;
+
+  console.log("function executed");
+  console.log(_this);
+
+  ledeLink = $(_this).hasClass("lede__link");
+
+  if (ledeLink) {
+    console.log("title change")
+    $(_this).text(newTitle);
+  } 
+
 }
 
 function changeLink(_this) {
@@ -98,7 +114,13 @@ function main() {
     // if we're on facebook and it's a link to facebook handle it specially
     if (isFacebook && $(this).attr('href') && $(this).attr('href').indexOf(currentUrl) > -1) {
       changeFacebookLink(this);
-    } else {
+    } 
+    if (isBuzzfeed && $(this).attr('href')) {
+      console.log("main called function")
+      changeBuzzfeedLink(this);
+    }
+
+    else {
       changeLink(this);
     }
   });
