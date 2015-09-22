@@ -17,7 +17,7 @@ function changeLink(_this) {
   }
 
   if (title && title.match(/\d+/g) && !changed) {
-    if (title.match(/\d+.+\d+.+\d+/g)) {
+    if (title.match(/\d+.*\s+.*\d+.*\s+.*\d+/g)) {
       $(_this).text(newTitle);
       changed = true;
     } else {
@@ -40,16 +40,14 @@ function changeLink(_this) {
   }
 }
 
+// runs on scroll stopped
+// idea from http://stackoverflow.com/a/12618549
 (function() {
   var timer;
   $(window).bind('scroll',function () {
     clearTimeout(timer);
-    timer = setTimeout( refresh , 150 );
+    timer = setTimeout(main(), 150 );
   });
-
-  var refresh = function () {
-    main()
-  };
 })();
 
 // runs on page load
