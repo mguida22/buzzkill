@@ -7,11 +7,13 @@ A google chrome extension to change clickbait titled articles. No more distracti
 This (kind of) works right now but it's super slow and needs many improvements.
 
  - [ ] faster matching
- - [ ] match a wider variety of phrases
- - [ ] match links to sites such as buzzfeed, clickhole, upworthy, etc.
+ - [ ] match a wider variety of phrases (ongoing)
+ - [x] match links to sites such as buzzfeed, clickhole, upworthy, etc.
+ - [ ] block all links on buzzfeed, clickhole, upworthy, etc sites
  - [ ] generate replacement titles
  - [ ] add icon and publish to chrome store
  - [ ] update when page changes
+ - [ ] infinite scrolling support
 
 ---
 
