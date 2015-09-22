@@ -1,3 +1,27 @@
+var currentUrl;
+var isFacebook = false;
+
+function formatCurrentUrl() {
+  // send to lowercase for easier matching later
+  currentUrl = window.location.href.toLowerCase();
+  // remove http stuff (ex. 'https://')
+  currentUrl = currentUrl.replace(/^https?:\/\//g, '');
+  // remove items after tld (ex. '/posts/120')
+  currentUrl = (/.+\.\w+\//g).exec(currentUrl)[0];
+
+  if (!currentUrl) {
+    currentUrl = window.location.href;
+  }
+
+  if (currentUrl.indexOf('facebook') > -1) {
+    isFacebook = true;
+  }
+}
+
+function changeFacebookLink(_this) {
+  changeLink(_this);
+}
+
 function changeLink(_this) {
   var title, link;
   var changed = false;
@@ -17,17 +41,12 @@ function changeLink(_this) {
   }
 
   if (title && title.match(/\d+/g) && !changed) {
-    if (title.match(/\d+.*\s+.*\d+.*\s+.*\d+/g)) {
-      $(_this).text(newTitle);
-      changed = true;
-    } else {
-      dict["number_phrases"].forEach(function(phrase) {
-        if (title.indexOf(phrase) > -1) {
-          $(_this).text(newTitle);
-          changed = true;
-        }
-      });
-    }
+    dict["number_phrases"].forEach(function(phrase) {
+      if (title.indexOf(phrase) > -1) {
+        $(_this).text(newTitle);
+        changed = true;
+      }
+    });
   }
 
   if (link && !changed) {
@@ -52,11 +71,16 @@ function changeLink(_this) {
 
 // runs on page load
 $(function() {
+  formatCurrentUrl();
   main();
 });
 
 function main() {
   $("a").each(function() {
+    // if we're on facebook and it's a link to facebook, don't change
+    if (isFacebook && $(this).attr('href') && $(this).attr('href').indexOf(currentUrl) > -1) {
+      changeFacebookLink(this);
+    }
     changeLink(this);
   });
 }
