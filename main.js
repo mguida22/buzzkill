@@ -36,7 +36,8 @@ function changeFacebookLink(_this) {
   if (uilinkSubtle || UFINoWrap || UFIShareLink || UFICommentLink || UFICommentLike) {
 
     return;
-  } else {
+  } 
+   else {
 
     changeLink(_this);
   }
@@ -65,6 +66,7 @@ function changeLink(_this) {
   title = $(_this).text();
   title = title.trim().toLowerCase();
 
+
   if (title) {
     dict["phrases"].forEach(function(phrase) {
       if (title.indexOf(phrase) > -1) {
@@ -87,6 +89,7 @@ function changeLink(_this) {
     dict["blocked_urls"].forEach(function(url) {
       if (link.indexOf(url) > -1) {
         $(_this).text(newTitle);
+        $(_this).closest('span').remove();
         changed = true;
       }
     });
