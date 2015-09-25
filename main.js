@@ -19,7 +19,6 @@ function formatCurrentUrl() {
   }
 
   if (currentUrl.indexOf('buzzfeed') > -1) {
-    console.log("caught url")
     isBuzzfeed = true;
   }
 }
@@ -34,11 +33,8 @@ function changeFacebookLink(_this) {
   UFICommentLike = $(_this).hasClass("UFICommentLikeButton");
 
   if (uilinkSubtle || UFINoWrap || UFIShareLink || UFICommentLink || UFICommentLike) {
-
     return;
-  } 
-   else {
-
+  } else {
     changeLink(_this);
   }
 }
@@ -46,16 +42,11 @@ function changeFacebookLink(_this) {
 function changeBuzzfeedLink(_this) {
   var ledeLink;
 
-  console.log("function executed");
-  console.log(_this);
-
   ledeLink = $(_this).hasClass("lede__link");
 
   if (ledeLink) {
-    console.log("title change")
     $(_this).text(newTitle);
-  } 
-
+  }
 }
 
 function changeLink(_this) {
@@ -117,12 +108,9 @@ function main() {
     // if we're on facebook and it's a link to facebook handle it specially
     if (isFacebook && $(this).attr('href') && $(this).attr('href').indexOf(currentUrl) > -1) {
       changeFacebookLink(this);
-    } 
-    if (isBuzzfeed && $(this).attr('href')) {
-      console.log("main called function")
+    } else if (isBuzzfeed && $(this).attr('href')) {
       changeBuzzfeedLink(this);
     }
-
     else {
       changeLink(this);
     }
