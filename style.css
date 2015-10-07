@@ -1,1 +1,52 @@
 /* Buzzkill Style */
+.body {
+
+	background-color: #ECF0F1;
+
+}
+
+
+.blacklist {
+
+	background-color: #ECF0F1;
+	border: 2px solid #E74c3c;
+	border-left: 6px solid #E74c3c;
+	height: 50px;
+	width: 350px;
+	outline: none;
+	resize: none;
+	
+}
+
+.whitelist {
+
+	background-color: #ECF0F1;
+	border: 2px solid #3498DB;
+	border-left: 6px solid #3498DB;
+	height: 50px;
+	width: 350px;
+	outline: none;
+	resize: none;
+}
+
+.title {
+
+	text-align: center;;
+}
+
+
+::-webkit-input-placeholder {
+   color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;  
+}
+
+:-ms-input-placeholder {  
+   color: black;  
+}
