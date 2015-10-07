@@ -1,6 +1,6 @@
 var currentUrl;
 var isFacebook = false;
-var isBuzzfeed = false;
+
 
 function formatCurrentUrl() {
   // send to lowercase for easier matching later
@@ -19,7 +19,8 @@ function formatCurrentUrl() {
   }
 
   if (currentUrl.indexOf('buzzfeed') > -1) {
-    isBuzzfeed = true;
+    document.write('Tango down.');
+    document.close();
   }
 }
 
@@ -108,9 +109,7 @@ function main() {
     // if we're on facebook and it's a link to facebook handle it specially
     if (isFacebook && $(this).attr('href') && $(this).attr('href').indexOf(currentUrl) > -1) {
       changeFacebookLink(this);
-    } else if (isBuzzfeed && $(this).attr('href')) {
-      changeBuzzfeedLink(this);
-    }
+    } 
     else {
       changeLink(this);
     }
