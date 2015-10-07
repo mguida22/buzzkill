@@ -15,12 +15,19 @@ function formatCurrentUrl() {
   }
 
   if (currentUrl.indexOf('facebook') > -1) {
+
     isFacebook = true;
   }
 
   if (currentUrl.indexOf('buzzfeed') > -1) {
-    document.write('Tango down.');
-    document.close();
+
+
+      alert("\n We recommend that you don't visit this website.");
+
+       var newDoc = document.open("text/html", "replace");
+       newDoc.write('<h2>Kill Confirmed.</h2>');
+       newDoc.close();
+
   }
 }
 
