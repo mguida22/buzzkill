@@ -2,17 +2,20 @@
 <html>
   <head>
     <title>Buzzkill</title>
-    <link rel="stylesheet" type="text/css" href="stlye.css">
-    <script src="popup.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery-2.1.4.min.js"></script>
   </head>
   <body>
     <h2>Buzzkill</h2>
 
-    <input type="checkbox" name="active" value="true" checked>Active<br>
+    <input type="checkbox" id="active" value="true" checked>Active<br>
 
     <h4>Whitelist</h4>
     <textarea id="whitelist" placeholder="Url(s) to not block"></textarea>
     <h4>Blacklist</h4>
     <textarea id="blacklist" placeholder="Url(s) to block"></textarea>
+
+    <input type="button" id="save" value="Save" name="save">
+    <script src="popup.js"></script>
   </body>
 </html>
