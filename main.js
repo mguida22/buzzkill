@@ -2,6 +2,17 @@ var currentUrl;
 var isFacebook = false;
 var isBuzzfeed = false;
 
+var active;
+var whitelist = [];
+
+function updateFromStorage(cb) {
+  chrome.storage.sync.get(['active', 'whitelist'], function(data) {
+    active = data.active;
+    whitelist = data.whitelist;
+    return cb();
+  });
+}
+
 function formatCurrentUrl() {
   // send to lowercase for easier matching later
   currentUrl = window.location.href.toLowerCase();
@@ -90,17 +101,23 @@ function changeLink(_this) {
 // runs on scroll stopped
 // idea from http://stackoverflow.com/a/12618549
 (function() {
-  var timer;
-  $(window).bind('scroll',function () {
-    clearTimeout(timer);
-    timer = setTimeout(main(), 150 );
-  });
+  if (active) {
+    var timer;
+    $(window).bind('scroll',function () {
+      clearTimeout(timer);
+      timer = setTimeout(main(), 150);
+    });
+  }
 })();
 
 // runs on page load
 $(function() {
-  formatCurrentUrl();
-  main();
+  updateFromStorage(function() {
+    if (active) {
+      formatCurrentUrl();
+      main();
+    }
+  });
 });
 
 function main() {
