@@ -3,7 +3,7 @@
 
   "name": "Buzzkill",
   "description": "Down with Buzzfeed! Remove all clickbait style articles",
-  "version": "0.1.0",
+  "version": "0.2.0",
 
   "icons": {
     "16": "icons/icon16.png",
@@ -14,8 +14,8 @@
 
   "content_scripts": [{
     "matches": ["*://*/*"],
-    "js": ["jquery-2.1.4.min.js", "roundslider.min.js", "fa-multi-button.min.js", "main.js", "dict.js", "popup.js"],
-    "css": ["roundslider.min.css", "font-awesome.min.css"]
+    "js": ["vendor/jquery-2.1.4.min.js", "vendor/roundslider.min.js", "vendor/fa-multi-button.min.js", "js/main.js", "dict.js", "js/popup.js"],
+    "css": ["vendor/roundslider.min.css", "vendor/font-awesome.min.css"]
   }],
 
   "browser_action": {
