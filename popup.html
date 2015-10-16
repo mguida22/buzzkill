@@ -2,27 +2,32 @@
 <html>
   <head>
     <title>Buzzkill</title>
+
+
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="popup.js"></script>
-  </head>
-  <body class="body">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+    <link href="roundslider.min.css" rel="stylesheet" />
+   
+    <body class="body">
     <div>
+
+    
     <h2 class="title">Buzzkill</h2>
+    <div id="slider" class="rslider"></div>
+    <div class="activateButton" id="demo"></div>
 
-
-    <form action="">
-    <input type="radio" name="sex" value="male">Tiny
-    <input type="radio" name="sex" value="female">Sorta
-    <input type="radio" name="sex" value="female" checked>Medium
-    <input type="radio" name="sex" value="female">Most
-    <input type="radio" name="sex" value="female">Everything
-    </form>
-
-
-    <h4 class="title">Whitelist</h4>
+    <h4 class="title" id="whitelist">Whitelist</h4>
     <textarea class="whitelist" id="whitelist" placeholder="I wanna see these sites..."></textarea>
-    <h4 class="title">Blacklist</h4>
-    <textarea class="blacklist" id="blacklist" placeholder="buzzfeed.com, clickhole.com"></textarea>
+  </div>
+
+    <script src="jquery-1.11.3.min.js"></script>
+    <script src="roundslider.min.js"></script>
+    <script src="fa-multi-button.min.js"></script>
+    <script src="popup.js"></script>
   </body>
+
+
   </div>
 </html>
