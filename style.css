@@ -1,0 +1,62 @@
+/* Buzzkill Style */
+.body {
+	background-color: #ECF0F1;
+}
+
+.rslider {
+  position: relative;
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: -10px;
+}
+
+.activateButton {
+	margin-top: -80px;
+	margin-left: 20px;
+	position: relative;
+}
+
+#slider .rs-range-color  {
+    background-color: #3498DB;
+}
+#slider .rs-path-color  {
+    background-color: #dedede;
+}
+#slider .rs-handle  {
+    background-color: #000000;
+}
+#slider .rs-border  {
+    border-color: #ECF0F1;
+}
+
+.whitelist {
+	background-color: #ECF0F1;
+	border: 2px solid #3498DB;
+	border-left: 6px solid #3498DB;
+	margin-top: -15px;
+	height: 50px;
+	width: 260px;
+	outline: none;
+	resize: none;
+}
+
+.title {
+	text-align: center;;
+}
+
+
+::-webkit-input-placeholder {
+   color: #aaa;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #aaa;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #aaa;
+}
+
+:-ms-input-placeholder {
+   color: #aaa;
+}

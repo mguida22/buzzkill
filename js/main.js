@@ -1,14 +1,35 @@
-var currentUrl;
+var currentUrl, whitelistedUrl;
 var isFacebook = false;
 var isBuzzfeed = false;
+var whitelistedUrl = false;
+
+var active;
+var whitelist = [];
+
+function formatUrl(url) {
+  // send to lowercase for easier matching later
+  url = url.toLowerCase();
+  // remove http stuff (ex. 'https://')
+  url = url.replace(/^https?:\/\//g, '');
+  // remove items after tld (ex. '/posts/120')
+  url = (/.+\.\w+\//g).exec(url);
+  if (url) {
+    return url[0];
+  }
+  return null;
+}
+
+function updateFromStorage(cb) {
+  chrome.storage.sync.get(['active', 'whitelist'], function(data) {
+    active = data.active;
+    whitelist = data.whitelist;
+
+    cb();
+  });
+}
 
 function formatCurrentUrl() {
-  // send to lowercase for easier matching later
-  currentUrl = window.location.href.toLowerCase();
-  // remove http stuff (ex. 'https://')
-  currentUrl = currentUrl.replace(/^https?:\/\//g, '');
-  // remove items after tld (ex. '/posts/120')
-  currentUrl = (/.+\.\w+\//g).exec(currentUrl)[0];
+  currentUrl = formatUrl(window.location.href);
 
   if (!currentUrl) {
     currentUrl = window.location.href;
@@ -19,9 +40,15 @@ function formatCurrentUrl() {
   }
 
   if (currentUrl.indexOf('buzzfeed') > -1) {
-    console.log("caught url")
     isBuzzfeed = true;
   }
+
+  whitelistedUrl = false;
+  whitelist.forEach(function(url) {
+    if (url.indexOf(currentUrl) > -1) {
+      whitelistedUrl = true;
+    }
+  });
 }
 
 function changeFacebookLink(_this) {
@@ -34,10 +61,8 @@ function changeFacebookLink(_this) {
   UFICommentLike = $(_this).hasClass("UFICommentLikeButton");
 
   if (uilinkSubtle || UFINoWrap || UFIShareLink || UFICommentLink || UFICommentLike) {
-
     return;
   } else {
-
     changeLink(_this);
   }
 }
@@ -45,16 +70,11 @@ function changeFacebookLink(_this) {
 function changeBuzzfeedLink(_this) {
   var ledeLink;
 
-  console.log("function executed");
-  console.log(_this);
-
   ledeLink = $(_this).hasClass("lede__link");
 
   if (ledeLink) {
-    console.log("title change")
     $(_this).text(newTitle);
-  } 
-
+  }
 }
 
 function changeLink(_this) {
@@ -64,6 +84,7 @@ function changeLink(_this) {
   link = $(_this).attr('href');
   title = $(_this).text();
   title = title.trim().toLowerCase();
+
 
   if (title) {
     dict["phrases"].forEach(function(phrase) {
@@ -87,6 +108,7 @@ function changeLink(_this) {
     dict["blocked_urls"].forEach(function(url) {
       if (link.indexOf(url) > -1) {
         $(_this).text(newTitle);
+        $(_this).closest('span').remove();
         changed = true;
       }
     });
@@ -96,17 +118,25 @@ function changeLink(_this) {
 // runs on scroll stopped
 // idea from http://stackoverflow.com/a/12618549
 (function() {
-  var timer;
-  $(window).bind('scroll',function () {
-    clearTimeout(timer);
-    timer = setTimeout(main(), 150 );
-  });
+  if (active && !whitelistedUrl) {
+    var timer;
+    $(window).bind('scroll',function () {
+      clearTimeout(timer);
+      timer = setTimeout(main(), 150);
+    });
+  }
 })();
 
 // runs on page load
 $(function() {
-  formatCurrentUrl();
-  main();
+  updateFromStorage(function() {
+    if (active) {
+      formatCurrentUrl();
+      if (!whitelistedUrl) {
+        main();
+      }
+    }
+  });
 });
 
 function main() {
@@ -114,12 +144,9 @@ function main() {
     // if we're on facebook and it's a link to facebook handle it specially
     if (isFacebook && $(this).attr('href') && $(this).attr('href').indexOf(currentUrl) > -1) {
       changeFacebookLink(this);
-    } 
-    if (isBuzzfeed && $(this).attr('href')) {
-      console.log("main called function")
+    } else if (isBuzzfeed && $(this).attr('href')) {
       changeBuzzfeedLink(this);
     }
-
     else {
       changeLink(this);
     }
