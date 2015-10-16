@@ -1,17 +1,3 @@
-// grabs the current url of the tab
-function getCurrentTabUrl(callback) {
-  var queryInfo = {
-    active: true,
-    currentWindow: true
-  };
-
-  chrome.tabs.query(queryInfo, function(tabs) {
-    var tab = tabs[0];
-    var url = tab.url;
-    callback(url);
-  });
-}
-
 $("#slider").roundSlider({
   value: 50,
   radius: 43,
@@ -24,7 +10,7 @@ $("#slider").roundSlider({
   tooltipFormat: "changeTooltip"
 });
 
-$('#active').famultibutton({
+var btn = $('#active').famultibutton({
 	classes: ['fa-4x'],
 	icon: 'fa-bolt',
   onColor: '#000',
@@ -32,4 +18,34 @@ $('#active').famultibutton({
   onBackgroundColor: '#3498DB',
   offBackgroundColor: '#bbb',
   mode: 'toggle',
+  toggleOn: function() {
+    chrome.storage.sync.set({'active': true});
+  },
+  toggleOff: function() {
+    chrome.storage.sync.set({'active': false});
+  }
+});
+
+$("#save").click(function() {
+  var sWhitelist = $("#whitelist").val();
+  sWhitelist = sWhitelist.replace(/ /g, '').split(',');
+
+  var formattedWhitelist = [];
+  sWhitelist.forEach(function(url) {
+    url = formatUrl(url);
+    if (url) {
+      formattedWhitelist.push(url);
+    }
+  });
+
+  chrome.storage.sync.set({'whitelist': formattedWhitelist});
+});
+
+chrome.storage.sync.get(['active', 'whitelist'], function(data) {
+  if (data.active) {
+    btn.setOn();
+  } else {
+    btn.setOff();
+  }
+  $("#whitelist").val(data.whitelist.join(", "));
 });
