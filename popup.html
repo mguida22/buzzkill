@@ -2,20 +2,28 @@
 <html>
   <head>
     <title>Buzzkill</title>
+
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="roundslider.min.css" rel="stylesheet"/>
   </head>
-  <body>
-    <h2>Buzzkill</h2>
 
-    <input type="checkbox" id="active" value="true" checked>Active<br>
+  <body class="body">
+    <div>
+      <h2 class="title">Buzzkill</h2>
 
-    <h4>Whitelist</h4>
-    <textarea id="whitelist" placeholder="Url(s) to not block"></textarea>
-    <h4>Blacklist</h4>
-    <textarea id="blacklist" placeholder="Url(s) to block"></textarea>
+      <div id="slider" class="rslider"></div>
+      <div class="activateButton" id="active"></div>
 
-    <input type="button" id="save" value="Save" name="save">
+      <h4 class="title">Whitelist</h4>
+      <textarea class="whitelist" id="whitelist" placeholder="Url(s) to disclude"></textarea>
+
+      <input type="button" id="save" value="Save" name="save">
+    </div>
+
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="roundslider.min.js"></script>
+    <script src="fa-multi-button.min.js"></script>
     <script src="main.js"></script>
     <script src="popup.js"></script>
   </body>

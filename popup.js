@@ -1,26 +1,33 @@
-chrome.storage.sync.get(['active', 'whitelist'], function(data) {
-  $("#active").prop('checked', data.active);
-  $("#whitelist").val(data.whitelist.join(", "));
+$("#slider").roundSlider({
+  value: 50,
+  radius: 43,
+  width: 6,
+  handleSize: "10,8",
+  handleShape: "square",
+  sliderType: "min-range",
+  mouseScrollAction: true,
+  editableTooltip: false,
+  tooltipFormat: "changeTooltip"
 });
 
-// grabs the current url of the tab
-function getCurrentTabUrl(callback) {
-  var queryInfo = {
-    active: true,
-    currentWindow: true
-  };
-
-  chrome.tabs.query(queryInfo, function(tabs) {
-    var tab = tabs[0];
-    var url = tab.url;
-    callback(url);
-  });
-}
+var btn = $('#active').famultibutton({
+	classes: ['fa-4x'],
+	icon: 'fa-bolt',
+  onColor: '#000',
+  offColor: '#ffffff',
+  onBackgroundColor: '#3498DB',
+  offBackgroundColor: '#bbb',
+  mode: 'toggle',
+  toggleOn: function() {
+    chrome.storage.sync.set({'active': true});
+  },
+  toggleOff: function() {
+    chrome.storage.sync.set({'active': false});
+  }
+});
 
 $("#save").click(function() {
-  var sActive = $("#active").is(":checked");
   var sWhitelist = $("#whitelist").val();
-
   sWhitelist = sWhitelist.replace(/ /g, '').split(',');
 
   var formattedWhitelist = [];
@@ -31,6 +38,14 @@ $("#save").click(function() {
     }
   });
 
-  chrome.storage.sync.set({'active': sActive});
   chrome.storage.sync.set({'whitelist': formattedWhitelist});
+});
+
+chrome.storage.sync.get(['active', 'whitelist'], function(data) {
+  if (data.active) {
+    btn.setOn();
+  } else {
+    btn.setOff();
+  }
+  $("#whitelist").val(data.whitelist.join(", "));
 });

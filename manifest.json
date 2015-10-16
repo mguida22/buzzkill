@@ -14,7 +14,8 @@
 
   "content_scripts": [{
     "matches": ["*://*/*"],
-    "js": ["jquery-2.1.4.min.js", "main.js", "dict.js"]
+    "js": ["jquery-2.1.4.min.js", "roundslider.min.js", "fa-multi-button.min.js", "main.js", "dict.js", "popup.js"],
+    "css": ["roundslider.min.css", "font-awesome.min.css"]
   }],
 
   "browser_action": {
