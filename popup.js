@@ -18,11 +18,19 @@ function getCurrentTabUrl(callback) {
 }
 
 $("#save").click(function() {
-  var active = $("#active").is(":checked");
-  var whitelist = $("#whitelist").val();
+  var sActive = $("#active").is(":checked");
+  var sWhitelist = $("#whitelist").val();
 
-  whitelist = whitelist.replace(/ /g, '').split(',');
+  sWhitelist = sWhitelist.replace(/ /g, '').split(',');
 
-  chrome.storage.sync.set({'active': active});
-  chrome.storage.sync.set({'whitelist': whitelist});
+  var formattedWhitelist = [];
+  sWhitelist.forEach(function(url) {
+    url = formatUrl(url);
+    if (url) {
+      formattedWhitelist.push(url);
+    }
+  });
+
+  chrome.storage.sync.set({'active': sActive});
+  chrome.storage.sync.set({'whitelist': formattedWhitelist});
 });

@@ -1,25 +1,35 @@
-var currentUrl;
+var currentUrl, whitelistedUrl;
 var isFacebook = false;
 var isBuzzfeed = false;
+var whitelistedUrl = false;
 
 var active;
 var whitelist = [];
+
+function formatUrl(url) {
+  // send to lowercase for easier matching later
+  url = url.toLowerCase();
+  // remove http stuff (ex. 'https://')
+  url = url.replace(/^https?:\/\//g, '');
+  // remove items after tld (ex. '/posts/120')
+  url = (/.+\.\w+\//g).exec(url);
+  if (url) {
+    return url[0];
+  }
+  return null;
+}
 
 function updateFromStorage(cb) {
   chrome.storage.sync.get(['active', 'whitelist'], function(data) {
     active = data.active;
     whitelist = data.whitelist;
-    return cb();
+
+    cb();
   });
 }
 
 function formatCurrentUrl() {
-  // send to lowercase for easier matching later
-  currentUrl = window.location.href.toLowerCase();
-  // remove http stuff (ex. 'https://')
-  currentUrl = currentUrl.replace(/^https?:\/\//g, '');
-  // remove items after tld (ex. '/posts/120')
-  currentUrl = (/.+\.\w+\//g).exec(currentUrl)[0];
+  currentUrl = formatUrl(window.location.href);
 
   if (!currentUrl) {
     currentUrl = window.location.href;
@@ -32,6 +42,13 @@ function formatCurrentUrl() {
   if (currentUrl.indexOf('buzzfeed') > -1) {
     isBuzzfeed = true;
   }
+
+  whitelistedUrl = false;
+  whitelist.forEach(function(url) {
+    if (url.indexOf(currentUrl) > -1) {
+      whitelistedUrl = true;
+    }
+  });
 }
 
 function changeFacebookLink(_this) {
@@ -101,7 +118,7 @@ function changeLink(_this) {
 // runs on scroll stopped
 // idea from http://stackoverflow.com/a/12618549
 (function() {
-  if (active) {
+  if (active && !whitelistedUrl) {
     var timer;
     $(window).bind('scroll',function () {
       clearTimeout(timer);
@@ -115,7 +132,9 @@ $(function() {
   updateFromStorage(function() {
     if (active) {
       formatCurrentUrl();
-      main();
+      if (!whitelistedUrl) {
+        main();
+      }
     }
   });
 });
