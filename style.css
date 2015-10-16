@@ -1,8 +1,6 @@
 /* Buzzkill Style */
 .body {
-
 	background-color: #ECF0F1;
-
 }
 
 .rslider {
@@ -13,11 +11,9 @@
 }
 
 .activateButton {
-
 	margin-top: -80px;
 	margin-left: 20px;
 	position: relative;
-
 }
 
 #slider .rs-range-color  {
@@ -32,10 +28,8 @@
 #slider .rs-border  {
     border-color: #ECF0F1;
 }
- 
 
 .whitelist {
-
 	background-color: #ECF0F1;
 	border: 2px solid #3498DB;
 	border-left: 6px solid #3498DB;
@@ -47,7 +41,6 @@
 }
 
 .title {
-
 	text-align: center;;
 }
 
@@ -57,13 +50,13 @@
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #aaa;  
+   color: #aaa;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #aaa;  
+   color: #aaa;
 }
 
-:-ms-input-placeholder {  
-   color: #aaa;  
+:-ms-input-placeholder {
+   color: #aaa;
 }
