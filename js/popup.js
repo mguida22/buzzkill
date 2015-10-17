@@ -27,18 +27,18 @@ var btn = $('#active').famultibutton({
 });
 
 $("#save").click(function() {
+  $("#save").css("backgroundColor", "#bbb");
   var sWhitelist = $("#whitelist").val();
   sWhitelist = sWhitelist.replace(/ /g, '').split(',');
 
-  var formattedWhitelist = [];
-  sWhitelist.forEach(function(url) {
-    url = formatUrl(url);
-    if (url) {
-      formattedWhitelist.push(url);
-    }
+  if (!sWhitelist) {
+    sWhitelist = [];
+  }
+  chrome.storage.sync.set({'whitelist': sWhitelist}, function() {
+    setTimeout(function () {
+      $("#save").css("backgroundColor", "#3498DB");
+    }, 100);
   });
-
-  chrome.storage.sync.set({'whitelist': formattedWhitelist});
 });
 
 chrome.storage.sync.get(['active', 'whitelist'], function(data) {
@@ -47,5 +47,8 @@ chrome.storage.sync.get(['active', 'whitelist'], function(data) {
   } else {
     btn.setOff();
   }
-  $("#whitelist").val(data.whitelist.join(", "));
+
+  if (data.whitelist) {
+    $("#whitelist").val(data.whitelist.join(", "));
+  }
 });

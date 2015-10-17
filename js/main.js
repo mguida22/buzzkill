@@ -1,4 +1,4 @@
-var currentUrl, whitelistedUrl;
+var currentUrl;
 var isFacebook = false;
 var isBuzzfeed = false;
 var whitelistedUrl = false;
@@ -23,7 +23,6 @@ function updateFromStorage(cb) {
   chrome.storage.sync.get(['active', 'whitelist'], function(data) {
     active = data.active;
     whitelist = data.whitelist;
-
     cb();
   });
 }
@@ -44,11 +43,23 @@ function formatCurrentUrl() {
   }
 
   whitelistedUrl = false;
-  whitelist.forEach(function(url) {
-    if (url.indexOf(currentUrl) > -1) {
-      whitelistedUrl = true;
-    }
-  });
+  if (whitelist) {
+    whitelist.forEach(function(url) {
+      if (!url) {
+        return;
+      }
+
+      if (url.length > currentUrl.length) {
+        if (url.indexOf(currentUrl) > -1) {
+          whitelistedUrl = true;
+        }
+      } else {
+        if (currentUrl.indexOf(url) > -1) {
+          whitelistedUrl = true;
+        }
+      }
+    });
+  }
 }
 
 function changeFacebookLink(_this) {
