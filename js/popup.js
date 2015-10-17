@@ -27,13 +27,18 @@ var btn = $('#active').famultibutton({
 });
 
 $("#save").click(function() {
+  $("#save").css("backgroundColor", "#bbb");
   var sWhitelist = $("#whitelist").val();
   sWhitelist = sWhitelist.replace(/ /g, '').split(',');
 
   if (!sWhitelist) {
     sWhitelist = [];
   }
-  chrome.storage.sync.set({'whitelist': sWhitelist});
+  chrome.storage.sync.set({'whitelist': sWhitelist}, function() {
+    setTimeout(function () {
+      $("#save").css("backgroundColor", "#3498DB");
+    }, 100);
+  });
 });
 
 chrome.storage.sync.get(['active', 'whitelist'], function(data) {

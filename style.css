@@ -40,8 +40,16 @@
 	resize: none;
 }
 
+.save {
+	width: 272px;
+	color: #fdfdfd;
+	background-color: #3498DB;
+	border: 0;
+	outline: none;
+}
+
 .title {
-	text-align: center;;
+	text-align: center;
 }
 
 
