@@ -30,15 +30,10 @@ $("#save").click(function() {
   var sWhitelist = $("#whitelist").val();
   sWhitelist = sWhitelist.replace(/ /g, '').split(',');
 
-  var formattedWhitelist = [];
-  sWhitelist.forEach(function(url) {
-    url = formatUrl(url);
-    if (url) {
-      formattedWhitelist.push(url);
-    }
-  });
-
-  chrome.storage.sync.set({'whitelist': formattedWhitelist});
+  if (sWhitelist === undefined) {
+    sWhitelist = [];
+  }
+  chrome.storage.sync.set({'whitelist': sWhitelist});
 });
 
 chrome.storage.sync.get(['active', 'whitelist'], function(data) {
@@ -47,5 +42,8 @@ chrome.storage.sync.get(['active', 'whitelist'], function(data) {
   } else {
     btn.setOff();
   }
-  $("#whitelist").val(data.whitelist.join(", "));
+
+  if (data.whitelist) {
+    $("#whitelist").val(data.whitelist.join(", "));  
+  }
 });
