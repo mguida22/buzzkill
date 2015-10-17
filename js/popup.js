@@ -30,7 +30,7 @@ $("#save").click(function() {
   var sWhitelist = $("#whitelist").val();
   sWhitelist = sWhitelist.replace(/ /g, '').split(',');
 
-  if (sWhitelist === undefined) {
+  if (!sWhitelist) {
     sWhitelist = [];
   }
   chrome.storage.sync.set({'whitelist': sWhitelist});
@@ -44,6 +44,6 @@ chrome.storage.sync.get(['active', 'whitelist'], function(data) {
   }
 
   if (data.whitelist) {
-    $("#whitelist").val(data.whitelist.join(", "));  
+    $("#whitelist").val(data.whitelist.join(", "));
   }
 });

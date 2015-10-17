@@ -45,8 +45,18 @@ function formatCurrentUrl() {
   whitelistedUrl = false;
   if (whitelist) {
     whitelist.forEach(function(url) {
-      if (url.indexOf(currentUrl) > -1 || currentUrl.indexOf(url) > -1) {
-        whitelistedUrl = true;
+      if (!url) {
+        return;
+      }
+
+      if (url.length > currentUrl.length) {
+        if (url.indexOf(currentUrl) > -1) {
+          whitelistedUrl = true;
+        }
+      } else {
+        if (currentUrl.indexOf(url) > -1) {
+          whitelistedUrl = true;
+        }
       }
     });
   }
