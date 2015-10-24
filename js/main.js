@@ -152,10 +152,10 @@ $(function() {
 
 function main() {
   $("a").each(function() {
-    // if we're on facebook and it's a link to facebook handle it specially
-    if (isFacebook && $(this).attr('href') && $(this).attr('href').indexOf(currentUrl) > -1) {
+    var link = $(this).attr('href');
+    if (isFacebook && link && (link.indexOf(currentUrl) > -1 || link.charAt(0) === '/')) {
       changeFacebookLink(this);
-    } else if (isBuzzfeed && $(this).attr('href')) {
+    } else if (isBuzzfeed && link) {
       changeBuzzfeedLink(this);
     }
     else {
