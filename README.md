@@ -4,13 +4,13 @@
 
 A google chrome extension to change clickbait titled articles. No more distracting links on Facebook or anywhere else!
 
-![screenshot](https://cloud.githubusercontent.com/assets/10404138/10717602/07f2e4f0-7b23-11e5-9ab0-9454741c6afb.png)
+![screenshot](https://cloud.githubusercontent.com/assets/9451227/10718037/d22e9830-7b2e-11e5-8974-0b7be5fc95a0.png)
 
 ### Philosophy
 
 The goal of this project is to promote better news.
 
-Sites such as BuzzFeed do anything they can to get views, at the cost of good journalism. Clickbait titles are used as a way to draw in readers, often using phrases that provide no information but spark someones interest. Once a user is viewing an article, they do not care about informing the reader about the issue. There is little content for articles, none of which is backed by facts and references. This does not help educate readers and further their knowledge.
+Sites such as BuzzFeed do anything they can to get views, at the cost of good journalism. Clickbait titles are used as a way to draw in readers, often using phrases that provide no information but spark someones interest. Once a user is viewing an article, they do not care about informing the reader about the issue. There is little content for articles, none of which is backed by facts and references. This does not help educate readers and further their knowledge. We aim to encourage readers to seek better news sources and authors to write better articles.
 
 ### Running Locally
 
