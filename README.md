@@ -4,7 +4,7 @@
 
 A google chrome extension to change clickbait titled articles. No more distracting links on Facebook or anywhere else!
 
-![screenshot](https://cloud.githubusercontent.com/assets/9451227/10718037/d22e9830-7b2e-11e5-8974-0b7be5fc95a0.png)
+<img src="https://cloud.githubusercontent.com/assets/9451227/10718037/d22e9830-7b2e-11e5-8974-0b7be5fc95a0.png" alt="screenshot width="400" height="400" />
 
 ### Philosophy
 
