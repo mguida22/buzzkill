@@ -76,7 +76,6 @@ var dict = {
   "blocked_urls": [
     "bzfd.it",
     "buzzfeed.com",
-    "clickhole.com",
     "u.pw",
     "upworthy.com",
     "on.mtv.com"
