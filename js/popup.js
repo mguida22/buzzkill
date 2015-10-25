@@ -42,10 +42,10 @@ $("#save").click(function() {
 });
 
 chrome.storage.sync.get(['active', 'whitelist'], function(data) {
-  if (data.active) {
-    btn.setOn();
-  } else {
+  if (data.active === false) {
     btn.setOff();
+  } else {
+    btn.setOn();
   }
 
   if (data.whitelist) {
