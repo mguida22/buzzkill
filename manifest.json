@@ -3,7 +3,7 @@
 
   "name": "Buzzkill",
   "description": "Down with Buzzfeed! Remove all clickbait style articles",
-  "version": "0.2.2",
+  "version": "0.2.3",
 
   "icons": {
     "16": "icons/icon16.png",
