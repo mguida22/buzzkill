@@ -16,16 +16,16 @@
 	position: relative;
 }
 
-#slider .rs-range-color  {
+#buzzkill-slider .rs-range-color  {
     background-color: #3498DB;
 }
-#slider .rs-path-color  {
+#buzzkill-slider .rs-path-color  {
     background-color: #dedede;
 }
-#slider .rs-handle  {
+#buzzkill-slider .rs-handle  {
     background-color: #000000;
 }
-#slider .rs-border  {
+#buzzkill-slider .rs-border  {
     border-color: #ECF0F1;
 }
 

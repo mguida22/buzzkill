@@ -78,7 +78,8 @@ var dict = {
     "buzzfeed.com",
     "u.pw",
     "upworthy.com",
-    "on.mtv.com"
+    "on.mtv.com",
+    "diply.com"
   ]
 };
 

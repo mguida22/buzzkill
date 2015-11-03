@@ -1,4 +1,4 @@
-$("#slider").roundSlider({
+$("#buzzkill-slider").roundSlider({
   value: 50,
   radius: 43,
   width: 6,
@@ -10,7 +10,7 @@ $("#slider").roundSlider({
   tooltipFormat: "changeTooltip"
 });
 
-var btn = $('#active').famultibutton({
+var btn = $('#buzzkill-active').famultibutton({
 	classes: ['fa-4x'],
 	icon: 'fa-bolt',
   onColor: '#000',
@@ -26,9 +26,9 @@ var btn = $('#active').famultibutton({
   }
 });
 
-$("#save").click(function() {
-  $("#save").css("backgroundColor", "#bbb");
-  var sWhitelist = $("#whitelist").val();
+$("#buzzkill-save").click(function() {
+  $("#buzzkill-save").css("backgroundColor", "#bbb");
+  var sWhitelist = $("#buzzkill-whitelist").val();
   sWhitelist = sWhitelist.replace(/ /g, '').split(',');
 
   if (!sWhitelist) {
@@ -36,7 +36,7 @@ $("#save").click(function() {
   }
   chrome.storage.sync.set({'whitelist': sWhitelist}, function() {
     setTimeout(function () {
-      $("#save").css("backgroundColor", "#3498DB");
+      $("#buzzkill-save").css("backgroundColor", "#3498DB");
     }, 100);
   });
 });
@@ -49,6 +49,6 @@ chrome.storage.sync.get(['active', 'whitelist'], function(data) {
   }
 
   if (data.whitelist) {
-    $("#whitelist").val(data.whitelist.join(", "));
+    $("#buzzkill-whitelist").val(data.whitelist.join(", "));
   }
 });
