@@ -71,7 +71,8 @@ var dict = {
     "secrets",
     "tricks",
     "books",
-    "confessions"
+    "confessions",
+    "fun"
   ],
   "blocked_urls": [
     "bzfd.it",
