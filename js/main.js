@@ -6,6 +6,15 @@ var whitelistedUrl = false;
 var active;
 var whitelist = [];
 
+
+function updateFromStorage(cb) {
+  chrome.storage.sync.get(['active', 'whitelist'], function(data) {
+    active = data.active;
+    whitelist = data.whitelist;
+    cb();
+  });
+}
+
 function formatUrl(url) {
   // send to lowercase for easier matching later
   url = url.toLowerCase();
@@ -17,14 +26,6 @@ function formatUrl(url) {
     return url[0];
   }
   return null;
-}
-
-function updateFromStorage(cb) {
-  chrome.storage.sync.get(['active', 'whitelist'], function(data) {
-    active = data.active;
-    whitelist = data.whitelist;
-    cb();
-  });
 }
 
 function formatCurrentUrl() {
@@ -129,11 +130,11 @@ function changeLink(_this) {
 // runs on scroll stopped
 // idea from http://stackoverflow.com/a/12618549
 (function() {
-  if (active && !whitelistedUrl) {
+  if (!whitelistedUrl) {
     var timer;
     $(window).bind('scroll',function () {
       clearTimeout(timer);
-      timer = setTimeout(main(), 150);
+      timer = setTimeout(main(), 99999);
     });
   }
 })();
